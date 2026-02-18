@@ -54,6 +54,15 @@ const seedData = async () => {
       throw new Error('Refusing to seed in production. Set NODE_ENV!=production.');
     }
 
+    // Optional one-time reset to remove duplicates
+    const shouldReset = String(process.env.SEED_RESET).toLowerCase() === 'true';
+    if (shouldReset) {
+      await Variant.deleteMany({});
+      await Product.deleteMany({});
+      await Band.deleteMany({});
+      console.log('Cleared Bands/Products/Variants (SEED_RESET=true)');
+    }
+
     // Upsert bands
     const bands = [
       {
