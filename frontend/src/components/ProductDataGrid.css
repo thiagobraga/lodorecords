@@ -1,0 +1,251 @@
+.product-data-grid {
+  position: relative;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.loading-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  border-radius: 8px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 10px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.grid-container {
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.data-grid-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+  font-size: 14px;
+}
+
+.data-grid-table thead {
+  background: transparent;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.data-grid-table th {
+  padding: 12px 8px;
+  text-align: left;
+  font-weight: 600;
+  color: #495057;
+  border-right: 1px solid #dee2e6;
+  white-space: nowrap;
+}
+
+.data-grid-table th:last-child {
+  border-right: none;
+}
+
+.data-grid-table tbody tr {
+  border-bottom: 1px solid #dee2e6;
+  transition: background-color 0.2s;
+  background: transparent;
+}
+
+.data-grid-table tbody tr:hover {
+  background: transparent;
+}
+
+.data-grid-table td {
+  padding: 8px;
+  border-right: 1px solid #dee2e6;
+  vertical-align: middle;
+}
+
+.data-grid-table td:last-child {
+  border-right: none;
+}
+
+/* Image cell styles */
+.image-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+}
+
+.grid-image {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #dee2e6;
+}
+
+/* Editable cell styles */
+.editable-cell {
+  display: block;
+  width: 100%;
+  min-height: 20px;
+  padding: 4px 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.editable-cell:hover {
+  background-color: #e9ecef;
+}
+
+/* Input styles */
+.text-input,
+.price-input,
+.stock-input {
+  width: 100%;
+  padding: 4px 8px;
+  border: 2px solid #007bff;
+  border-radius: 4px;
+  font-size: 14px;
+  outline: none;
+  background: white;
+}
+
+.text-input:focus,
+.price-input:focus,
+.stock-input:focus {
+  border-color: #0056b3;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.price-input,
+.stock-input {
+  text-align: right;
+}
+
+/* Checkbox styles */
+.featured-checkbox {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: #007bff;
+}
+
+/* Actions cell styles */
+.actions-cell {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.btn-sm {
+  padding: 4px 8px;
+  font-size: 11px;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .data-grid-table {
+    font-size: 12px;
+  }
+  
+  .data-grid-table th,
+  .data-grid-table td {
+    padding: 6px 4px;
+  }
+  
+  .grid-image {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .image-cell {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .data-grid-table {
+    background: transparent;
+    color: #e2e8f0;
+  }
+  
+  .data-grid-table thead {
+    background: transparent;
+  }
+  
+  .data-grid-table th {
+    color: #e2e8f0;
+    border-color: #4a5568;
+  }
+  
+  .data-grid-table td {
+    border-color: #4a5568;
+  }
+  
+  .data-grid-table tbody tr:hover {
+    background: transparent;
+  }
+  
+  .editable-cell:hover {
+    background: transparent;
+  }
+  
+  .text-input,
+  .price-input,
+  .stock-input {
+    background: transparent;
+    color: #e2e8f0;
+    border-color: #4a5568;
+  }
+  
+  .loading-overlay {
+    background: rgba(45, 55, 72, 0.8);
+  }
+}
