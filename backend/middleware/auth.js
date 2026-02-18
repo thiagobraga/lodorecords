@@ -4,6 +4,12 @@ const User = require('../models/User');
 // Protect routes - support Passport session or JWT token
 const protect = async (req, res, next) => {
   try {
+    // Dev bypass (for local development only)
+    if (process.env.NODE_ENV !== 'production' && String(process.env.DEV_BYPASS_AUTH).toLowerCase() === 'true') {
+      req.user = { id: 'dev', name: 'Dev Admin', email: 'admin@dev.local', role: 'admin', isActive: true };
+      return next();
+    }
+
     // If Passport session is active, trust req.user
     if (typeof req.isAuthenticated === 'function' && req.isAuthenticated()) {
       if (!req.user) {
