@@ -28,7 +28,7 @@ const LoginPage = () => {
           
           <div className="login-footer">
             <p>This is a development environment with simplified access.</p>
-            <button className="btn btn-secondary" onClick={handleBackToHome}>
+            <button className="btn btn-primary" onClick={handleBackToHome}>
               Back to Home
             </button>
           </div>

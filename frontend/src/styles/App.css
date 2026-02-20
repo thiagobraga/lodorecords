@@ -12,7 +12,8 @@ a:hover {
 }
 
 a:visited {
-  color: var(--primary-color);
+  /* keep visited links same as normal links */
+  color: inherit;
 }
 
 /* Ensure buttons are not affected by global link styles */
@@ -71,7 +72,8 @@ button.btn-danger:visited {
 
 .main-content {
   flex: 1;
-  padding-top: var(--header-height);
+  /* offset fixed navbar */
+  margin-top: var(--header-height);
 }
 
 /* Make all sections fill the viewport (accounting for fixed header) */
@@ -408,9 +410,6 @@ a.btn-danger:hover {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
   }
-}
-.main-content {
-  margin-top: calc(-1 * var(--header-height));
 }
 html, body {
   height: auto;

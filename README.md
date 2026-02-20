@@ -1,4 +1,7 @@
-# Lodo Records
+<div align="center">
+  <img src="./frontend/public/images/lodo-records-logo-black-transparent.png" alt="Lodo Records" width="220" />
+  <h1>Lodo Records</h1>
+</div>
 
 A full-stack e-commerce application for a music record store, built with React frontend and Node.js backend, containerized with Docker.
 

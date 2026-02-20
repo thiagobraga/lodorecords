@@ -2,6 +2,11 @@
 
 /* HomePage Styles */
 
+/* Home needs to sit behind the fixed header (internal pages keep the offset) */
+.home-page {
+  margin-top: calc(-1 * var(--header-height));
+}
+
 /* Hero Section */
 .hero {
   width: 100%;
@@ -148,14 +153,12 @@
   padding: 6rem 0;
 }
 
+/* One logo per line */
 .staff-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 3rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  grid-template-columns: 1fr;
+  gap: 4rem;
   align-items: center;
-  padding: 0 2rem;
 }
 
 .staff-item {
@@ -165,7 +168,7 @@
 }
 
 .staff-item img {
-  height: clamp(120px, 16vw, 200px);
+  height: clamp(120px, 16vw, 140px);
   width: auto;
   max-width: 100%;
   object-fit: contain;
@@ -217,6 +220,9 @@
 .newsletter-section {
   padding: 5rem 0;
   position: relative;
+  min-height: 550px;
+  display: flex;
+  align-items: center;
 }
 
 .newsletter-content {
@@ -227,10 +233,9 @@
   z-index: 1;
 }
 
-.newsletter-content h2 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
+/* Newsletter title uses .section-title now */
+.newsletter-content .section-title {
+  margin-bottom: 1.25rem;
 }
 
 .newsletter-content p {

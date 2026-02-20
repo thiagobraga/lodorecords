@@ -12,7 +12,7 @@ function NotFoundPage() {
           <p>The page you're looking for seems to have wandered off into the music void. Let's get you back on track!</p>
           <div className="action-buttons">
             <Link to="/" className="btn btn-primary">Back to Home</Link>
-            <Link to="/products" className="btn btn-secondary">Browse Records</Link>
+            <Link to="/products" className="btn btn-primary">Browse Records</Link>
           </div>
         </div>
       </div>

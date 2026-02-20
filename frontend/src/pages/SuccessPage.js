@@ -24,7 +24,7 @@ function SuccessPage() {
           </div>
           <div className="action-buttons">
             <a href="/" className="btn btn-primary">Continue Shopping</a>
-            <a href="/orders" className="btn btn-secondary">View Orders</a>
+            <a href="/orders" className="btn btn-primary">View Orders</a>
           </div>
         </div>
       </div>

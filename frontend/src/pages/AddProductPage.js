@@ -83,7 +83,7 @@ const AddProductPage = () => {
     <div className="add-product-page">
       <div className="page-header">
         <button 
-          className="btn btn-secondary back-btn"
+          className="btn btn-primary back-btn"
           onClick={() => navigate('/admin')}
         >
           ← Back to Admin
@@ -212,7 +212,7 @@ const AddProductPage = () => {
             ))}
             <button
               type="button"
-              className="btn btn-sm btn-secondary"
+              className="btn btn-sm btn-primary"
               onClick={addImageField}
               disabled={loading}
             >
@@ -243,7 +243,7 @@ const AddProductPage = () => {
             </button>
             <button 
               type="button" 
-              className="btn btn-secondary"
+              className="btn btn-primary"
               onClick={() => navigate('/admin')}
               disabled={loading}
             >

@@ -1,5 +1,6 @@
-import { ReactLenis, useLenis } from 'lenis/react';
-import { Routes, Route } from 'react-router-dom';
+import { ReactLenis, useLenis } from './lib/lenisReact';
+import { useEffect } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import './styles/App.css';
 
 // Pages
@@ -20,14 +21,19 @@ import ProductDetailPage from './pages/ProductDetailPage';
 import ProductsPage from './pages/ProductsPage';
 import SuccessPage from './pages/SuccessPage';
 
-// Components
-
-// Context
-
 function App() {
+  const location = useLocation();
+
   useLenis((lenis) => {
     window.dispatchEvent(new CustomEvent('lenis-scroll', { detail: { scroll: lenis.scroll } }));
   });
+
+  useEffect(() => {
+    if (process.env.NODE_ENV === 'test') return;
+
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+  }, [location.pathname]);
+
   return (
     <ThemeProvider>
       <LanguageProvider>
@@ -44,9 +50,14 @@ function App() {
               <Route path="/success" element={<SuccessPage />} />
               <Route path="/artwork" element={<ArtworkPage />} />
               <Route path="/bands" element={<BandsPage />} />
+
+              {/* Admin routes */}
               <Route path="/admin" element={<AdminPage />} />
-              <Route path="/login" element={<LoginPage />} />
+              <Route path="/admin/products" element={<AdminPage />} />
+              <Route path="/admin/bands" element={<AdminPage />} />
               <Route path="/admin/add-product" element={<AddProductPage />} />
+
+              <Route path="/login" element={<LoginPage />} />
               <Route path="*" element={<NotFoundPage />} />
             </Routes>
           </main>
