@@ -70,6 +70,13 @@ services:
       - /app/node_modules
     networks:
       - lodo-network
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.lodorecords.rule=Host(`lodorecords.local`)"
+      - "traefik.http.routers.lodorecords.entrypoints=websecure"
+      - "traefik.http.routers.lodorecords.tls=true"
+      - "traefik.http.services.lodorecords.loadbalancer.server.port=3000"
 
 volumes:
   mongodb_data:
@@ -77,3 +84,5 @@ volumes:
 networks:
   lodo-network:
     driver: bridge
+  proxy:
+    external: true
