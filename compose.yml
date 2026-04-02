@@ -1,82 +1,80 @@
 services:
+  frontend:
+    container_name: lodo-frontend
+    build:
+      context: ./frontend
+      dockerfile: .docker/Dockerfile
+      target: development
+    command: bun run dev
+    restart: unless-stopped
+    depends_on: [backend]
+    volumes: [./frontend:/app, /app/node_modules]
+    networks: [lodo-network, proxy]
+    environment:
+      NODE_ENV: development
+      REACT_APP_API_URL: https://api.lodorecords.local
+      WDS_SOCKET_HOST: lodorecords.local
+      WDS_SOCKET_PORT: 443
+      ESLINT_CACHE: 'false'
+    labels:
+      traefik.enable: true
+      traefik.http.routers.lodo-frontend-router.rule: Host(`lodorecords.local`)
+      traefik.http.routers.lodo-frontend-router.entrypoints: websecure
+      traefik.http.routers.lodo-frontend-router.tls: true
+      traefik.http.services.lodo-frontend-service.loadbalancer.server.port: 3000
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: .docker/Dockerfile
+      target: development
+    container_name: lodo-backend
+    restart: unless-stopped
+    depends_on: [mongodb]
+    volumes: [./backend:/app, /app/node_modules]
+    networks: [lodo-network]
+    environment:
+      NODE_ENV: development
+      DEV_BYPASS_AUTH: true
+      MONGODB_URI: mongodb://admin:password123@mongodb:27017/lodorecords
+      PORT: 5000
+    labels:
+      traefik.enable: true
+      traefik.http.routers.lodo-backend-router.rule: Host(`api.lodorecords.local`)
+      traefik.http.routers.lodo-backend-router.entrypoints: websecure
+      traefik.http.routers.lodo-backend-router.tls: true
+      traefik.http.services.lodo-backend-service.loadbalancer.server.port: 5000
+
   mongodb:
     image: mongo:7.0
     container_name: lodo-mongodb
     restart: unless-stopped
-    ports:
-      - "27017:27017"
+    command: ['--auth', '--quiet']
+    volumes: [mongodb_data:/data/db]
+    networks: [lodo-network]
     environment:
       MONGO_INITDB_DATABASE: lodorecords
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password123
-    volumes:
-      - mongodb_data:/data/db
-    networks:
-      - lodo-network
-    command: ["--auth"]
 
-  mongo-express:
-    image: mongo-express:latest
+  .mongo-express:
     container_name: lodo-mongo-express
+    image: mongo-express:latest
     restart: unless-stopped
-    ports:
-      - "8081:8081"
+    depends_on: [mongodb]
+    networks: [lodo-network]
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: admin
       ME_CONFIG_MONGODB_ADMINPASSWORD: password123
       ME_CONFIG_MONGODB_URL: mongodb://admin:password123@mongodb:27017/admin
       ME_CONFIG_BASICAUTH_USERNAME: admin
       ME_CONFIG_BASICAUTH_PASSWORD: admin123
-    depends_on:
-      - mongodb
-    networks:
-      - lodo-network
-
-  backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
-    container_name: lodo-backend
-    restart: unless-stopped
-    ports:
-      - "5000:5000"
-    environment:
-      - NODE_ENV=development
-      - DEV_BYPASS_AUTH=true
-      - MONGODB_URI=mongodb://admin:password123@mongodb:27017/lodorecords
-      - PORT=5000
-    depends_on:
-      - mongodb
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
-    networks:
-      - lodo-network
-
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    container_name: lodo-frontend
-    restart: unless-stopped
-    ports:
-      - "3000:3000"
-    environment:
-      - REACT_APP_API_URL=http://localhost:5000
-    depends_on:
-      - backend
-    volumes:
-      - ./frontend:/app
-      - /app/node_modules
-    networks:
-      - lodo-network
-      - proxy
     labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.lodorecords.rule=Host(`lodorecords.local`)"
-      - "traefik.http.routers.lodorecords.entrypoints=websecure"
-      - "traefik.http.routers.lodorecords.tls=true"
-      - "traefik.http.services.lodorecords.loadbalancer.server.port=3000"
+      traefik.enable: true
+      traefik.http.routers.lodo-db-router.rule: Host(`db.lodorecords.local`)
+      traefik.http.routers.lodo-db-router.entrypoints: websecure
+      traefik.http.routers.lodo-db-router.tls: true
+      traefik.http.services.lodo-db-service.loadbalancer.server.port: 8080
 
 volumes:
   mongodb_data:
