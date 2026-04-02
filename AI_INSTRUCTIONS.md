@@ -1,11 +1,11 @@
 # AI Instructions for Lodo Records Project
 
 ## Project Overview
-Lodo Records is a full-stack e-commerce application for a music record store, built with React frontend and Node.js backend, containerized with Docker.
+Lodo Records is a full-stack e-commerce application for a music record store, built with React app and Node.js api, containerized with Docker.
 
 ## Architecture
-- **Frontend**: React application (port 3000)
-- **Backend**: Node.js/Express API (port 5000)
+- **app**: React application (port 3000)
+- **api**: Node.js/Express API (port 5000)
 - **Database**: MongoDB
 - **Containerization**: Docker Compose
 
@@ -26,9 +26,9 @@ Lodo Records is a full-stack e-commerce application for a music record store, bu
 
 ## Development Guidelines
 
-### Frontend Structure
+### app Structure
 ```
-frontend/src/
+app/src/
 ├── components/     # Reusable UI components
 ├── pages/         # Page components
 ├── styles/        # CSS files (one per component/page)
@@ -43,9 +43,9 @@ frontend/src/
 4. Maintain consistent spacing using CSS variables
 5. Use semantic class names
 
-### Backend Structure
+### api Structure
 ```
-backend/
+api/
 ├── controllers/   # Route handlers
 ├── models/        # MongoDB schemas
 ├── routes/        # API route definitions
@@ -86,8 +86,8 @@ backend/
 - Start: `docker compose up`
 - Stop: `docker compose down`
 - Rebuild: `docker compose up --build`
-- Frontend shell: `docker exec lodo-frontend bash`
-- Backend shell: `docker exec lodo-backend bash`
+- app shell: `docker exec lodo-app bash`
+- api shell: `docker exec lodo-api bash`
 
 ## Important Notes
 - Always use absolute paths in tool calls

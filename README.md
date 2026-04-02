@@ -1,9 +1,9 @@
 <div align="center">
-  <img src="./frontend/public/images/lodo-records-logo-black-transparent.png" alt="Lodo Records" width="220" />
+  <img src="./app/public/images/lodo-records-logo-black-transparent.png" alt="Lodo Records" width="220" />
   <h1>Lodo Records</h1>
 </div>
 
-A full-stack e-commerce application for a music record store, built with React frontend and Node.js backend, containerized with Docker.
+A full-stack e-commerce application for a music record store, built with React app and Node.js api, containerized with Docker.
 
 ## Docker Setup
 
@@ -27,16 +27,16 @@ This project includes a Docker Compose configuration for easy development and de
    ```
 
 3. The application will be available at:
-   - Frontend: http://localhost:3000
-   - Backend API: http://localhost:5000
+   - App: http://localhost:3000
+   - API: http://localhost:5000
    - MongoDB: localhost:27017
    - Mongo Express: http://localhost:8081
 
 ### Services
 
 - **MongoDB**: Database service running on port 27017
-- **Backend**: Node.js/Express API server running on port 5000
-- **Frontend**: React application running on port 3000
+- **api**: Node.js/Express API server running on port 5000
+- **app**: React application running on port 3000
 - **Mongo Express**: MongoDB web-based admin interface running on port 8081
 
 ### Development
@@ -51,29 +51,29 @@ docker-compose up -d
 docker-compose logs -f
 
 # View logs for specific service
-docker-compose logs -f backend
+docker-compose logs -f api
 
 # Stop services
 docker-compose down
 
 # Rebuild specific service
-docker-compose build backend
-docker-compose up backend
+docker-compose build api
+docker-compose up api
 ```
 
 ### Environment Variables
 
-The backend service uses the following environment variables:
+The API service uses the following environment variables:
 - `NODE_ENV`: Set to 'development'
 - `MONGODB_URI`: MongoDB connection string
 - `PORT`: Server port (5000)
 - `JWT_SECRET`: Secret key for JWT tokens
-- `CLIENT_URL`: Frontend URL for redirects
+- `CLIENT_URL`: app URL for redirects
 - `GOOGLE_CLIENT_ID`: Google OAuth client ID
 - `GOOGLE_CLIENT_SECRET`: Google OAuth client secret
 
-The frontend service uses:
-- `REACT_APP_API_URL`: Backend API URL
+The App service uses:
+- `REACT_APP_API_URL`: API URL
 
 ### Data Persistence
 
@@ -92,10 +92,10 @@ The project includes a seed script to populate the database with initial data (b
 
 ### Using Docker
 
-Run the seed script inside the backend container:
+Run the seed script inside the API container:
 
 ```bash
-docker exec -it lodo-backend node seedData.js
+docker exec -it lodo-api node seedData.js
 ```
 
 ### Without Docker
@@ -103,7 +103,7 @@ docker exec -it lodo-backend node seedData.js
 If running locally without Docker:
 
 ```bash
-cd backend
+cd api
 node seedData.js
 ```
 
@@ -481,11 +481,11 @@ docker-compose up --build -d
 # View container status
 docker-compose ps
 
-# Access backend shell
-docker exec -it lodo-backend sh
+# Access api shell
+docker exec -it lodo-api sh
 
-# Access frontend shell
-docker exec -it lodo-frontend sh
+# Access app shell
+docker exec -it lodo-app sh
 
 # View MongoDB logs
 docker-compose logs -f mongodb

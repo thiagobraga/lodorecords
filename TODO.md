@@ -4,7 +4,7 @@
 - [x] Admin table view: remove "Featured/Not featured" text next to the toggle (keep only the switch)
 
 ## 19/02/2026 23:20
-- [x] Add this logo in README.md ./frontend/public/images/lodo-records-logo-black-transparent.png
+- [x] Add this logo in README.md ./app/public/images/lodo-records-logo-black-transparent.png
   - [x] Centered and with title below also centered
 
 ## 19/02/2026 23:00

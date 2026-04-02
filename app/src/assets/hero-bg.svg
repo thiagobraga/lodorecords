@@ -1,0 +1,41 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="heroGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a2e;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#16213e;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f3460;stop-opacity:1" />
+    </linearGradient>
+    <pattern id="musicPattern" patternUnits="userSpaceOnUse" width="100" height="100">
+      <circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/>
+      <circle cx="25" cy="25" r="1" fill="rgba(255,255,255,0.05)"/>
+      <circle cx="75" cy="75" r="1" fill="rgba(255,255,255,0.05)"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background gradient -->
+  <rect width="1920" height="1080" fill="url(#heroGradient)"/>
+  
+  <!-- Subtle pattern overlay -->
+  <rect width="1920" height="1080" fill="url(#musicPattern)"/>
+  
+  <!-- Abstract vinyl record shapes -->
+  <circle cx="300" cy="200" r="80" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+  <circle cx="300" cy="200" r="40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/>
+  <circle cx="300" cy="200" r="8" fill="rgba(255,255,255,0.1)"/>
+  
+  <circle cx="1600" cy="800" r="60" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2"/>
+  <circle cx="1600" cy="800" r="30" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+  <circle cx="1600" cy="800" r="6" fill="rgba(255,255,255,0.08)"/>
+  
+  <!-- Musical note shapes -->
+  <g transform="translate(1400, 300)" fill="rgba(255,255,255,0.06)">
+    <circle cx="0" cy="20" r="8"/>
+    <rect x="7" y="-30" width="2" height="50"/>
+    <path d="M9,-30 Q15,-25 15,-20 Q15,-15 9,-10" stroke="rgba(255,255,255,0.06)" stroke-width="2" fill="none"/>
+  </g>
+  
+  <g transform="translate(200, 700)" fill="rgba(255,255,255,0.04)">
+    <circle cx="0" cy="20" r="6"/>
+    <rect x="5" y="-25" width="1.5" height="45"/>
+  </g>
+</svg>

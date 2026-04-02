@@ -1,0 +1,12 @@
+.env.development.local
+.env.local
+.env.production.local
+.env.test.local
+.git
+.gitignore
+.nyc_output
+build
+coverage
+node_modules
+npm-debug.log
+README.md
