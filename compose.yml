@@ -24,11 +24,11 @@ services:
       traefik.http.services.lodo-app-service.loadbalancer.server.port: 3000
 
   api:
+    container_name: lodo-api
     build:
       context: ./api
       dockerfile: .docker/Dockerfile
       target: development
-    container_name: lodo-api
     restart: unless-stopped
     depends_on: [mongodb]
     volumes: [./api:/app, /app/node_modules]
@@ -46,8 +46,8 @@ services:
       traefik.http.services.lodo-api-service.loadbalancer.server.port: 5000
 
   mongodb:
-    image: mongo:7.0
     container_name: lodo-mongodb
+    image: mongo:7.0
     restart: unless-stopped
     command: ['--auth', '--quiet']
     volumes: [mongodb_data:/data/db]
