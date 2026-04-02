@@ -1,3 +1,5 @@
+name: lodorecords
+
 services:
   app:
     container_name: lodo-app
@@ -5,13 +7,13 @@ services:
       context: ./app
       dockerfile: .docker/Dockerfile
       target: development
-    command: bun run dev
     restart: unless-stopped
     depends_on: [api]
     volumes: [./app:/app, /app/node_modules]
     networks: [lodo-network, proxy]
     environment:
       NODE_ENV: development
+      NODE_OPTIONS: "--no-deprecation"
       REACT_APP_API_URL: https://api.lodorecords.local
       WDS_SOCKET_HOST: lodorecords.local
       WDS_SOCKET_PORT: 443
@@ -49,17 +51,20 @@ services:
     container_name: lodo-mongodb
     image: mongo:7.0
     restart: unless-stopped
-    command: ['--auth', '--quiet']
-    volumes: [mongodb_data:/data/db]
+    command: ["mongod", "--config", "/etc/mongod.conf"]
+    volumes: 
+      - mongodb_data:/data/db
+      - ./mongodb/mongod.conf:/etc/mongod.conf
     networks: [lodo-network]
     environment:
       MONGO_INITDB_DATABASE: lodorecords
       MONGO_INITDB_ROOT_USERNAME: admin
       MONGO_INITDB_ROOT_PASSWORD: password123
 
-  .mongo-express:
+  mongo-express:
     container_name: lodo-mongo-express
     image: mongo-express:latest
+    profiles: ['tools']
     restart: unless-stopped
     depends_on: [mongodb]
     networks: [lodo-network]
